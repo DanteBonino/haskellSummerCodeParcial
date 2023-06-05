@@ -31,7 +31,12 @@ sumarSiEsDeInteres unaPropuesta unMentor
 esDeInteres :: Propuesta -> Mentor -> Bool
 esDeInteres unaPropuesta = (elem (nombreProyecto unaPropuesta) . proyectosDeInteres)
 
---Punto 2:
+propuestaTest :: Propuesta
+propuestaTest = Propuesta "sarasa" "sar" ["comer"] 1900
+
+mentor :: Mentor
+mentor = Mentor "asd" ["sar"] (\propuesta -> (length.skills) propuesta)
+
 puntajeTotal :: Propuesta -> [Mentor] -> Int
 puntajeTotal unaPropuesta  =  sum . map (puntosSegun unaPropuesta)
 
@@ -42,6 +47,7 @@ propuestaConChances = filter (masDeN 3. skills)
 masDeN :: (Ord a) => Int -> [a] -> Bool
 masDeN unaCantidad = (>unaCantidad) . length
 
+
 --Punto 4:
 ranking ::  [Mentor] -> [Propuesta] -> [Resultado]
 ranking unosMentores = map (resultados unosMentores)
@@ -49,7 +55,8 @@ ranking unosMentores = map (resultados unosMentores)
 type Resultado = (String, String, Int)
 
 resultados :: [Mentor] -> Propuesta -> Resultado
-resultados unosMentores unaPropuesta = (nombreAlumno unaPropuesta, nombreProyecto unaPropuesta, puntajeTotal unaPropuesta unosMentores)
+resultados = armarTuplasDe3Elementos  puntajeTotal 
+
 
 --Punto 5:
 prupuestasDeInteres :: Mentor -> [Propuesta] -> [Propuesta]
@@ -73,3 +80,18 @@ puntaje (_, _, unPuntaje) = unPuntaje
 --Punto 7:
 nombreMentorMasInteresado :: Propuesta -> [Mentor] -> String
 nombreMentorMasInteresado unaPropuesta  = nombre . elDeMayor (puntosSegun unaPropuesta)
+
+
+--Punto 8:
+proyectosElegidos :: [Mentor] -> [Propuesta] -> [(String , String, String)]
+proyectosElegidos unosMentores =  map (armarPropuestaElegida unosMentores) . filter (esElegido unosMentores)
+
+esElegido :: [Mentor] -> Propuesta -> Bool
+esElegido unosMentores  = ((>12) . flip puntajeTotal unosMentores)
+
+armarPropuestaElegida :: [Mentor] -> Propuesta -> (String , String, String)
+armarPropuestaElegida   = armarTuplasDe3Elementos nombreMentorMasInteresado
+
+
+armarTuplasDe3Elementos :: (Propuesta -> [Mentor] -> a) -> [Mentor] -> Propuesta ->  (String, String, a)
+armarTuplasDe3Elementos unaFuncion unosMentores unaPropuesta   = (nombreAlumno unaPropuesta, nombreProyecto unaPropuesta, unaFuncion unaPropuesta unosMentores)
