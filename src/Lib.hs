@@ -95,3 +95,9 @@ armarPropuestaElegida   = armarTuplasDe3Elementos nombreMentorMasInteresado
 
 armarTuplasDe3Elementos :: (Propuesta -> [Mentor] -> a) -> [Mentor] -> Propuesta ->  (String, String, a)
 armarTuplasDe3Elementos unaFuncion unosMentores unaPropuesta   = (nombreAlumno unaPropuesta, nombreProyecto unaPropuesta, unaFuncion unaPropuesta unosMentores)
+
+--Punto 9
+{-
+De la forma en que lo hice, que se agreguen nuevas propiedades no es problema. Si se llegan a eliminar propiedades, sí afectaría pq hay funciones que dejarían de exisitir y, en algunos casos, las funciones que se crearon dejarían de tener sentido.
+-}
+
