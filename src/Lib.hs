@@ -50,3 +50,7 @@ type Resultado = (String, String, Int)
 
 resultados :: [Mentor] -> Propuesta -> Resultado
 resultados unosMentores unaPropuesta = (nombreAlumno unaPropuesta, nombreProyecto unaPropuesta, puntajeTotal unaPropuesta unosMentores)
+
+--Punto 5:
+prupuestasDeInteres :: Mentor -> [Propuesta] -> [Propuesta]
+prupuestasDeInteres unMentor = filter (flip esDeInteres unMentor)
