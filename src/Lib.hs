@@ -30,3 +30,8 @@ sumarSiEsDeInteres unaPropuesta unMentor
 
 esDeInteres :: Propuesta -> Mentor -> Bool
 esDeInteres unaPropuesta = (elem (nombreProyecto unaPropuesta) . proyectosDeInteres)
+
+--Punto 2:
+puntajeTotal :: Propuesta -> [Mentor] -> Int
+puntajeTotal unaPropuesta  =  sum . map (puntosSegun unaPropuesta)
+
