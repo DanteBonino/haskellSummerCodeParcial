@@ -41,3 +41,12 @@ propuestaConChances = filter (masDeN 3. skills)
 
 masDeN :: (Ord a) => Int -> [a] -> Bool
 masDeN unaCantidad = (>unaCantidad) . length
+
+--Punto 4:
+ranking ::  [Mentor] -> [Propuesta] -> [Resultado]
+ranking unosMentores = map (resultados unosMentores)
+
+type Resultado = (String, String, Int)
+
+resultados :: [Mentor] -> Propuesta -> Resultado
+resultados unosMentores unaPropuesta = (nombreAlumno unaPropuesta, nombreProyecto unaPropuesta, puntajeTotal unaPropuesta unosMentores)
