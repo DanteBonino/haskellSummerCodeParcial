@@ -54,3 +54,18 @@ resultados unosMentores unaPropuesta = (nombreAlumno unaPropuesta, nombreProyect
 --Punto 5:
 prupuestasDeInteres :: Mentor -> [Propuesta] -> [Propuesta]
 prupuestasDeInteres unMentor = filter (flip esDeInteres unMentor)
+
+--Punto 6:
+resultadoConMasVotos :: [Mentor] -> [Propuesta] -> Resultado
+resultadoConMasVotos unosMentores = (elDeMayor puntaje . ranking unosMentores)
+
+elDeMayor :: (Ord b) => (a -> b) -> [a] -> a
+elDeMayor transformador = foldl1 (mayorSegun transformador)
+
+mayorSegun :: (Ord b) => (a -> b) -> a -> a -> a
+mayorSegun transformador unValor otroValor
+    | transformador unValor > transformador otroValor = unValor
+    | otherwise                                       = otroValor
+
+puntaje :: Resultado -> Int
+puntaje (_, _, unPuntaje) = unPuntaje
