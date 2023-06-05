@@ -35,3 +35,9 @@ esDeInteres unaPropuesta = (elem (nombreProyecto unaPropuesta) . proyectosDeInte
 puntajeTotal :: Propuesta -> [Mentor] -> Int
 puntajeTotal unaPropuesta  =  sum . map (puntosSegun unaPropuesta)
 
+--Punto 3:
+propuestaConChances :: [Propuesta] -> [Propuesta]
+propuestaConChances = filter (masDeN 3. skills)
+
+masDeN :: (Ord a) => Int -> [a] -> Bool
+masDeN unaCantidad = (>unaCantidad) . length
