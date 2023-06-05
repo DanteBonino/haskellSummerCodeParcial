@@ -69,3 +69,7 @@ mayorSegun transformador unValor otroValor
 
 puntaje :: Resultado -> Int
 puntaje (_, _, unPuntaje) = unPuntaje
+
+--Punto 7:
+nombreMentorMasInteresado :: Propuesta -> [Mentor] -> String
+nombreMentorMasInteresado unaPropuesta  = nombre . elDeMayor (puntosSegun unaPropuesta)
